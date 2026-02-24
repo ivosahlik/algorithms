@@ -6,14 +6,12 @@ import java.util.stream.IntStream;
 
 public class HistorianHysteria {
     public static int totalDistance(List<Integer> left, List<Integer> right) {
-        if (left.isEmpty() || right.isEmpty()) {
+        if (left == null || left.isEmpty() ||
+                right == null || right.isEmpty()) {
             throw new IllegalArgumentException("Put left or right dataset!!");
         }
         List<Integer> sortedLeft = left.stream().sorted().toList();
         List<Integer> sortedRight = right.stream().sorted().toList();
-
-        System.out.println(left);  // [1, 2, 3, 3, 3, 4]
-        System.out.println(right); // [3, 3, 3, 4, 5, 9]
 
         return IntStream.range(0, left.size())
                 .map(i -> Math.abs(sortedLeft.get(i) - sortedRight.get(i)))
