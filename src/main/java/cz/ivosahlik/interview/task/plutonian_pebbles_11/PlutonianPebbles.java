@@ -1,7 +1,7 @@
 package cz.ivosahlik.interview.task.plutonian_pebbles_11;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -16,12 +16,12 @@ public class PlutonianPebbles {
                 .map(Long::parseLong)
                 .collect(Collectors.groupingBy(
                         Function.identity(),
-                        LinkedHashMap::new,
+                        HashMap::new,
                         Collectors.counting()
                 ));
 
         for (int i = 0; i < blinks; i++) {
-            Map<Long, Long> next = new LinkedHashMap<>();
+            Map<Long, Long> next = new HashMap<>();
             stones.forEach((key, val) -> {
                 if (key == 0) {
                     next.merge(1L, val, Long::sum);
