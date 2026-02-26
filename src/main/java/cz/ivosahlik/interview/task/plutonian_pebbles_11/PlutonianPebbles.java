@@ -11,14 +11,16 @@ public class PlutonianPebbles {
     public static final int INT_NUMBER = 2024;
 
     public static long countStones(String input, int blinks) {
-
-        Map<Long, Long> stones = Arrays.stream(input.split(" "))
-                .map(Long::parseLong)
-                .collect(Collectors.groupingBy(
-                        Function.identity(),
-                        HashMap::new,
-                        Collectors.counting()
-                ));
+        long start = System.nanoTime();
+        Map<Long, Long> stones =
+                Arrays.stream(input.split(" "))
+                        .map(Long::parseLong)
+                        .collect(Collectors.toMap(
+                                Function.identity(),
+                                v -> 1L,
+                                Long::sum,
+                                HashMap::new
+                        ));
 
         for (int i = 0; i < blinks; i++) {
             Map<Long, Long> next = new HashMap<>();
@@ -43,10 +45,15 @@ public class PlutonianPebbles {
             stones = next;
         }
 
-        return stones.values()
+        long sum = stones.values()
                 .stream()
                 .mapToLong(Long::longValue)
                 .sum();
+
+        long end = System.nanoTime();
+        System.out.println("Čas: " + (end - start) / 1_000_000.0 + " ms");
+
+        return sum;
     }
 
     static void main(String[] args) {
