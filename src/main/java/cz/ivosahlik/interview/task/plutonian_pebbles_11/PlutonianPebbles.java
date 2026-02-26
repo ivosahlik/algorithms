@@ -45,7 +45,7 @@ public class PlutonianPebbles {
             stones = next;
         }
 
-        // Five stones -> 1 2024 1 0 9 9 2021976
+        // Five stones(jedno mrknutí) -> 1 2024 1 0 9 9 2021976
         // In picture HashMap.png, you can see 0 1 202976 2024 9, it seems, that it is different... hashmap
         // show you that there is 1 - 2x, 8 - 2x, such count numbers is the same as in example, but ordering is different,
         // because the aim of task is performance.
