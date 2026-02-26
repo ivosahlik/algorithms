@@ -76,6 +76,12 @@ public class PlutonianPebbles {
         String input3 = "125 17";
         int blinks3 = 25;
         System.out.println("Počet kamenů po " + blinks3 + " mrknutí je " + countStones(input3, blinks3));
+        System.out.println("----------------------------------");
+
+        // Example 3
+        String input4 = "125 17";
+        int blinks4 = 75;
+        System.out.println("Počet kamenů po " + blinks4 + " mrknutí je " + countStones(input4, blinks4));
     }
 
 }
