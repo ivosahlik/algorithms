@@ -1,31 +1,44 @@
 package cz.ivosahlik.interview.task.historian_hysteria_01;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class HistorianHysteriaTest {
-    @Test
-    void shouldCalculateTotalDistance_exampleFromTask() {
-        List<Integer> left = Arrays.asList(3,4,2,1,3,3);
-        List<Integer> right = Arrays.asList(4,3,5,3,9,3);
-        assertEquals(11, HistorianHysteria.totalDistance(left, right));
+
+    record TestCase(List<Integer> left, List<Integer> right, int expectedDistance) {}
+
+    static Stream<TestCase> totalDistanceData() {
+        return Stream.of(
+                new TestCase(List.of(3, 4, 2, 1, 3, 3), List.of(4, 3, 5, 3, 9, 3), 11),
+                new TestCase(List.of(1, 2, 3), List.of(1, 2, 3), 0),
+                new TestCase(List.of(-3, -1, 2), List.of(0, -2, 1), 3),
+                new TestCase(List.of(1), List.of(100), 99),
+                new TestCase(List.of(5, 1), List.of(1, 5), 0)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("totalDistanceData")
+    void totalDistance(TestCase tc) {
+        assertEquals(tc.expectedDistance(), HistorianHysteria.totalDistance(tc.left(), tc.right()));
     }
 
     @Test
-    void shouldReturnZeroWhenListsAreIdentical() {
-        List<Integer> left = Arrays.asList(1,2,3);
-        List<Integer> right = Arrays.asList(1,2,3);
-        assertEquals(0, HistorianHysteria.totalDistance(left, right));
+    void shouldThrowWhenLeftIsNull() {
+        assertThrows(IllegalArgumentException.class,
+                () -> HistorianHysteria.totalDistance(null, List.of(1)));
     }
 
     @Test
-    void shouldWorkWithNegativeNumbers() {
-        List<Integer> left = Arrays.asList(-3, -1, 2);
-        List<Integer> right = Arrays.asList(0, -2, 1);
-        assertEquals(3, HistorianHysteria.totalDistance(left, right));
+    void shouldThrowWhenRightIsEmpty() {
+        assertThrows(IllegalArgumentException.class,
+                () -> HistorianHysteria.totalDistance(List.of(1), List.of()));
     }
 }
