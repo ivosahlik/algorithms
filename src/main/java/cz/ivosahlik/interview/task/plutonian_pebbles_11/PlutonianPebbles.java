@@ -12,15 +12,14 @@ public class PlutonianPebbles {
 
     public static long countStones(String input, int blinks) {
         long start = System.nanoTime();
-        Map<Long, Long> stones =
-                Arrays.stream(input.split(" "))
-                        .map(Long::parseLong)
-                        .collect(Collectors.toMap(
-                                Function.identity(),
-                                v -> 1L,
-                                Long::sum,
-                                HashMap::new
-                        ));
+        Map<Long, Long> stones = Arrays.stream(input.split(" "))
+                .map(Long::parseLong)
+                .collect(Collectors.toMap(
+                        Function.identity(),
+                        v -> 1L,
+                        Long::sum,
+                        HashMap::new
+                ));
 
         for (int i = 0; i < blinks; i++) {
             Map<Long, Long> next = new HashMap<>();
