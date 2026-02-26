@@ -17,8 +17,7 @@ public class PlutonianPebbles {
                 .collect(Collectors.toMap(
                         Function.identity(),
                         v -> 1L,
-                        Long::sum,
-                        HashMap::new
+                        Long::sum
                 ));
 
         for (int i = 0; i < blinks; i++) {
