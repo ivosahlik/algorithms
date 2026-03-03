@@ -2,6 +2,7 @@ package cz.ivosahlik.interview.task.historian_hysteria_01;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class HistorianHysteriaWithoutStream {
     public static int totalDistance(int[] left, int[] right) {
@@ -9,6 +10,8 @@ public class HistorianHysteriaWithoutStream {
 
         Arrays.sort(left);
         Arrays.sort(right);
+
+        // int sum = IntStream.range(0, left.length).map(i -> Math.abs(right[i] - left[i])).sum(); // Slower
 
         int sum = 0;
         for (int i = 0; i < left.length; i++) {
