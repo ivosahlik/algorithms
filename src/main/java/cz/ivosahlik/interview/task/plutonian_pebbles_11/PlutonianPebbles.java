@@ -52,8 +52,7 @@ public class PlutonianPebbles {
                 .mapToLong(Long::longValue)
                 .sum();
 
-        long end = System.nanoTime();
-        System.out.println("Čas: " + (end - start) / 1_000_000.0 + " ms");
+        System.out.println("Čas: " + (System.nanoTime() - start) / 1_000_000.0 + " ms");
 
         return sum;
     }

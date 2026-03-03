@@ -6,6 +6,8 @@ import java.util.stream.IntStream;
 
 public class HistorianHysteria {
     public static int totalDistance(List<Integer> left, List<Integer> right) {
+        long start = System.nanoTime();
+
         if (left == null || left.isEmpty() ||
                 right == null || right.isEmpty()) {
             throw new IllegalArgumentException("Put left or right dataset!!");
@@ -13,9 +15,13 @@ public class HistorianHysteria {
         List<Integer> sortedLeft = left.stream().sorted().toList();
         List<Integer> sortedRight = right.stream().sorted().toList();
 
-        return IntStream.range(0, left.size())
+        int sum = IntStream.range(0, left.size())
                 .map(i -> Math.abs(sortedLeft.get(i) - sortedRight.get(i)))
                 .sum();
+
+        System.out.println("Čas: " + (System.nanoTime() - start) / 1_000_000.0 + " ms");
+
+        return sum;
     }
 
     static void main(String[] args) {
